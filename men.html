@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>紳士男鞋專區 | AuraStride 極光步履</title>
+  <meta name="description" content="瀏覽 AuraStride 極光步履男鞋系列。精緻手工雕花牛津鞋、樂福鞋、切爾西皮靴與極簡真皮小白鞋，專為紳士打造。">
+  <link class="icon" rel="icon" href="assets/logo.png" type="image/png">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- 導航欄容器 -->
+  <div id="header-container"></div>
+
+  <main class="main-content">
+    
+    <!-- 商品列表 Banner -->
+    <section class="shop-hero" style="background-image: linear-gradient(rgba(15,15,17,0.75), rgba(15,15,17,0.75)), url('assets/products/men_1.png')">
+      <div class="container">
+        <h1>男鞋專區</h1>
+        <p>優雅風範・商務正裝與日常雅痞的完美平衡</p>
+      </div>
+    </section>
+
+    <!-- 商品網格與篩選 -->
+    <section class="container" style="padding-bottom: 80px;">
+      <!-- 篩選列 -->
+      <div class="shop-filter-bar">
+        <div class="filter-results-count">
+          顯示共 <span id="results-count" style="font-weight: 700; color: var(--color-accent);">4</span> 款精品男鞋
+        </div>
+        <div class="filter-controls">
+          <select id="sort-select" class="filter-select" onchange="handleSortChange()">
+            <option value="default">預設排序</option>
+            <option value="price-asc">價格：由低到高</option>
+            <option value="price-desc">價格：由高到低</option>
+            <option value="rating">推薦星級</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- 商品列表網格 -->
+      <div id="men-products-grid" class="grid-4">
+        <!-- JS 動態渲染 -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- 頁尾容器 -->
+  <div id="footer-container"></div>
+
+  <!-- JS 引入 -->
+  <script src="js/products.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      setTimeout(() => {
+        renderProducts();
+      }, 100);
+    });
+
+    function renderProducts() {
+      const sortVal = document.getElementById("sort-select").value;
+      if (typeof renderProductGrid === "function") {
+        renderProductGrid("men-products-grid", "men", sortVal);
+        
+        // 更新統計數量
+        const count = ProductDB.getByCategory("men").length;
+        document.getElementById("results-count").textContent = count;
+      }
+    }
+
+    function handleSortChange() {
+      renderProducts();
+    }
+  </script>
+</body>
+</html>

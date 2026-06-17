@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>產品詳情 | AuraStride 極光步履</title>
+  <meta name="description" content="瀏覽 AuraStride 極光步履鞋履細節。精緻皮質、緩震中底工藝與精確尺碼選擇。">
+  <link class="icon" rel="icon" href="assets/logo.png" type="image/png">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* Breadcrumb styles */
+    .breadcrumb {
+      padding: 24px 0;
+      font-size: 14px;
+      color: var(--color-text-muted);
+    }
+    .breadcrumb a:hover {
+      color: var(--color-accent);
+    }
+    .breadcrumb-sep {
+      margin: 0 10px;
+      color: #ccc;
+    }
+    .breadcrumb-current {
+      color: var(--color-primary);
+      font-weight: 600;
+    }
+    .related-products-section {
+      padding: 80px 0;
+      border-top: 1px solid var(--color-border);
+    }
+    .no-product-view {
+      padding: 100px 24px;
+      text-align: center;
+      min-height: 50vh;
+    }
+    .no-product-view i {
+      font-size: 64px;
+      color: var(--color-border);
+      margin-bottom: 24px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 導航欄容器 -->
+  <div id="header-container"></div>
+
+  <main class="main-content">
+    
+    <!-- 商品不存在時的顯示畫面 -->
+    <div id="product-not-found" class="container no-product-view" style="display: none;">
+      <i class="fas fa-exclamation-circle"></i>
+      <h2>很抱歉，找不到該款商品</h2>
+      <p style="color: var(--color-text-muted); margin: 16px 0 32px;">該商品可能已下架或網址不正確，您可以點擊下方按鈕回到首頁。</p>
+      <a href="index.html" class="cta-btn cta-btn-primary">回到首頁</a>
+    </div>
+
+    <!-- 商品詳情內容 -->
+    <div id="product-detail-content" class="container">
+      
+      <!-- 麵包屑導航 -->
+      <div class="breadcrumb">
+        <a href="index.html">首頁</a>
+        <span class="breadcrumb-sep">/</span>
+        <a href="#" id="breadcrumb-category-link">分類</a>
+        <span class="breadcrumb-sep">/</span>
+        <span class="breadcrumb-current" id="breadcrumb-product-name">產品名稱</span>
+      </div>
+
+      <!-- 商品展示與訂購區域 -->
+      <div class="product-detail-wrapper">
+        
+        <!-- 左側：商品主圖 -->
+        <div class="product-gallery-area">
+          <div class="main-image-viewport">
+            <img id="product-main-image" src="" alt="">
+          </div>
+        </div>
+
+        <!-- 右側：訂購資訊 -->
+        <div class="product-buy-area">
+          <span class="detail-tag" id="product-tag">熱銷推薦</span>
+          <h1 class="detail-title" id="product-title">產品名稱</h1>
+          
+          <div class="detail-meta">
+            <!-- 評分與星級 -->
+            <div class="product-rating" id="product-rating-stars" style="margin-bottom: 0;">
+              <!-- 顆星 -->
+            </div>
+            <span class="breadcrumb-sep">|</span>
+            <span style="font-size: 14px; color: var(--color-text-muted);">
+              已銷售 <span id="product-sales" style="font-weight:700; color: var(--color-primary);">2K+</span> 雙
+            </span>
+          </div>
+
+          <div class="detail-price" id="product-price">NT$ 0</div>
+          
+          <p class="detail-desc" id="product-description">商品敘述載入中...</p>
+
+          <!-- 顏色選擇 -->
+          <div class="option-selector">
+            <span class="option-title">選擇顏色: <span id="selected-color-name" style="font-weight: 700; color: var(--color-accent); margin-left: 6px;"></span></span>
+            <div class="color-option-list" id="product-colors-list">
+              <!-- 顏色圈 -->
+            </div>
+          </div>
+
+          <!-- 尺寸選擇 -->
+          <div class="option-selector" style="margin-top: 30px;">
+            <span class="option-title">選擇尺碼 (歐規 EUR): <span id="selected-size-val" style="font-weight: 700; color: var(--color-accent); margin-left: 6px;"></span></span>
+            <div class="size-option-list" id="product-sizes-list">
+              <!-- 尺寸框 -->
+            </div>
+          </div>
+
+          <!-- 數量與購物車按鈕 -->
+          <div class="buy-action-panel">
+            <div class="detail-qty-control">
+              <button onclick="updateQty(-1)">-</button>
+              <input type="number" id="detail-qty-input" value="1" min="1" max="10" readonly>
+              <button onclick="updateQty(1)">+</button>
+            </div>
+            
+            <button class="add-to-cart-btn" onclick="addToCart()">
+              <i class="fas fa-shopping-bag"></i> 加入購物車
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- 商品規格細節 Tab 區域 -->
+      <section class="product-tabs-section">
+        <div class="tabs-header">
+          <button class="tab-btn active" onclick="switchTab(event, 'tab-features')">產品特點</button>
+          <button class="tab-btn" onclick="switchTab(event, 'tab-specs')">商品詳細規格</button>
+          <button class="tab-btn" onclick="switchTab(event, 'tab-shipping')">配送與售後</button>
+        </div>
+
+        <div class="tabs-content">
+          <!-- 產品特色 -->
+          <div id="tab-features" class="tab-pane active">
+            <ul class="features-list" id="product-features-list">
+              <!-- 特色條目 -->
+            </ul>
+          </div>
+          <!-- 產品規格表格 -->
+          <div id="tab-specs" class="tab-pane">
+            <table class="specs-table" id="product-specs-table">
+              <!-- 規格項目 -->
+            </table>
+          </div>
+          <!-- 配送資訊 -->
+          <div id="tab-shipping" class="tab-pane">
+            <ul class="features-list">
+              <li>本商品提供全台本島黑貓宅急便免費配送服務，通常出貨後 2-3 個工作天內配達。</li>
+              <li>支援信用卡一次付清、分期付款，以及 ATM 轉帳、LINE Pay 與 Apple Pay 等主流付款方式。</li>
+              <li>本品牌提供 7 天免費尺寸換貨與退貨鑑賞服務，退換貨鞋底須保持無污損狀態。</li>
+              <li>AuraStride 商品隨鞋皆附贈原廠防塵袋、鞋托，並享有 3 個月原廠非人為因素免費脫膠保固。</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- 相關產品推薦區 -->
+      <section class="related-products-section">
+        <div class="section-header" style="margin-bottom: 40px; text-align: left;">
+          <span class="section-tag" style="margin-left: 0;">RECOMMENDATIONS</span>
+          <h2 class="section-title" style="font-size: 28px;">您可能也會喜歡</h2>
+        </div>
+        
+        <div id="related-products-grid" class="grid-4">
+          <!-- 動態渲染相關推薦 -->
+        </div>
+      </section>
+
+    </div>
+
+  </main>
+
+  <!-- 頁尾容器 -->
+  <div id="footer-container"></div>
+
+  <!-- JS 引入 -->
+  <script src="js/products.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    let currentProduct = null;
+    let selectedColor = "";
+    let selectedSize = null;
+
+    document.addEventListener("DOMContentLoaded", () => {
+      // 延遲載入確保資料與 main.js 初始化完成
+      setTimeout(() => {
+        initProductPage();
+      }, 100);
+    });
+
+    function initProductPage() {
+      // 解析 url parameter `id`
+      const urlParams = new URLSearchParams(window.location.search);
+      const productId = urlParams.get("id");
+
+      currentProduct = ProductDB.getById(productId);
+
+      if (!currentProduct) {
+        document.getElementById("product-detail-content").style.display = "none";
+        document.getElementById("product-not-found").style.display = "block";
+        return;
+      }
+
+      // 渲染麵包屑
+      const catLink = document.getElementById("breadcrumb-category-link");
+      const catText = currentProduct.category === "men" ? "男鞋專區" :
+                      currentProduct.category === "women" ? "女鞋專區" :
+                      currentProduct.category === "sports" ? "運動鞋專區" : "熱銷商品";
+      const catUrl = currentProduct.category === "men" ? "men.html" :
+                     currentProduct.category === "women" ? "women.html" :
+                     currentProduct.category === "sports" ? "sports.html" : "hot.html";
+      catLink.textContent = catText;
+      catLink.href = catUrl;
+      document.getElementById("breadcrumb-product-name").textContent = currentProduct.name;
+
+      // 渲染商品主體
+      document.getElementById("product-main-image").src = currentProduct.image;
+      document.getElementById("product-main-image").alt = currentProduct.name;
+      document.getElementById("product-title").textContent = currentProduct.name;
+      document.getElementById("product-price").textContent = "NT$ " + currentProduct.price.toLocaleString();
+      document.getElementById("product-description").textContent = currentProduct.description;
+      document.getElementById("product-tag").textContent = currentProduct.tag;
+
+      // 銷量模擬
+      const simulatedSales = Math.floor(currentProduct.price % 3 === 0 ? 1200 : currentProduct.price % 2 === 0 ? 3400 : 800);
+      document.getElementById("product-sales").textContent = simulatedSales.toLocaleString();
+
+      // 渲染評分星星
+      const starsContainer = document.getElementById("product-rating-stars");
+      let starsHtml = "";
+      const floorRating = Math.floor(currentProduct.rating);
+      for (let i = 1; i <= 5; i++) {
+        if (i <= floorRating) {
+          starsHtml += '<i class="fas fa-star"></i>';
+        } else if (i - 0.5 <= currentProduct.rating) {
+          starsHtml += '<i class="fas fa-star-half-alt"></i>';
+        } else {
+          starsHtml += '<i class="far fa-star"></i>';
+        }
+      }
+      starsHtml += `<span class="product-rating-count"> ${currentProduct.rating} (已累積 ${currentProduct.reviewsCount} 則評價)</span>`;
+      starsContainer.innerHTML = starsHtml;
+
+      // 渲染色彩選項
+      const colorsContainer = document.getElementById("product-colors-list");
+      colorsContainer.innerHTML = "";
+      currentProduct.colors.forEach((col, idx) => {
+        const dotWrapper = document.createElement("div");
+        dotWrapper.className = `color-dot-wrapper ${idx === 0 ? 'active' : ''}`;
+        dotWrapper.onclick = () => selectColorOption(col.name, dotWrapper);
+        dotWrapper.title = col.name;
+        
+        const dot = document.createElement("div");
+        dot.className = "color-dot";
+        dot.style.backgroundColor = col.hex;
+
+        dotWrapper.appendChild(dot);
+        colorsContainer.appendChild(dotWrapper);
+      });
+      // 預設選取第一個顏色
+      selectedColor = currentProduct.colors[0].name;
+      document.getElementById("selected-color-name").textContent = selectedColor;
+
+      // 渲染尺寸選項
+      const sizesContainer = document.getElementById("product-sizes-list");
+      sizesContainer.innerHTML = "";
+      currentProduct.sizes.forEach((sz, idx) => {
+        const box = document.createElement("div");
+        box.className = `size-box ${idx === 0 ? 'active' : ''}`;
+        box.textContent = sz;
+        box.onclick = () => selectSizeOption(sz, box);
+        sizesContainer.appendChild(box);
+      });
+      // 預設選取第一個尺寸
+      selectedSize = currentProduct.sizes[0];
+      document.getElementById("selected-size-val").textContent = selectedSize;
+
+      // 渲染特點列表
+      const featuresContainer = document.getElementById("product-features-list");
+      featuresContainer.innerHTML = "";
+      currentProduct.features.forEach(ft => {
+        const li = document.createElement("li");
+        li.textContent = ft;
+        featuresContainer.appendChild(li);
+      });
+
+      // 渲染規格表格
+      const specsTable = document.getElementById("product-specs-table");
+      specsTable.innerHTML = "";
+      for (const [key, val] of Object.entries(currentProduct.specs)) {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td>${key}</td>
+          <td>${val}</td>
+        `;
+        specsTable.appendChild(row);
+      }
+
+      // 渲染相關產品推薦
+      renderRelated();
+    }
+
+    // 顏色選擇邏輯
+    function selectColorOption(colorName, el) {
+      document.querySelectorAll(".color-dot-wrapper").forEach(wrapper => {
+        wrapper.classList.remove("active");
+      });
+      el.classList.add("active");
+      selectedColor = colorName;
+      document.getElementById("selected-color-name").textContent = selectedColor;
+    }
+
+    // 尺寸選擇邏輯
+    function selectSizeOption(sizeVal, el) {
+      document.querySelectorAll(".size-box").forEach(box => {
+        box.classList.remove("active");
+      });
+      el.classList.add("active");
+      selectedSize = sizeVal;
+      document.getElementById("selected-size-val").textContent = selectedSize;
+    }
+
+    // 數量增減
+    function updateQty(change) {
+      const input = document.getElementById("detail-qty-input");
+      let val = parseInt(input.value) + change;
+      if (val < 1) val = 1;
+      if (val > 10) val = 10;
+      input.value = val;
+    }
+
+    // 加入購物車
+    function addToCart() {
+      if (!currentProduct) return;
+      const qty = parseInt(document.getElementById("detail-qty-input").value);
+      if (typeof Cart !== "undefined" && typeof Cart.add === "function") {
+        Cart.add(currentProduct.id, qty, selectedSize, selectedColor);
+      }
+    }
+
+    // 切換 Tabs
+    function switchTab(e, tabId) {
+      document.querySelectorAll(".tab-btn").forEach(btn => {
+        btn.classList.remove("active");
+      });
+      document.querySelectorAll(".tab-pane").forEach(pane => {
+        pane.classList.remove("active");
+      });
+
+      e.currentTarget.classList.add("active");
+      document.getElementById(tabId).classList.add("active");
+    }
+
+    // 渲染推薦商品
+    function renderRelated() {
+      const grid = document.getElementById("related-products-grid");
+      if (!grid || !currentProduct) return;
+
+      const related = ProductDB.getRelatedProducts(currentProduct.id, 4);
+      let html = "";
+      
+      related.forEach(p => {
+        let starsHtml = "";
+        const floorRating = Math.floor(p.rating);
+        for (let i = 1; i <= 5; i++) {
+          if (i <= floorRating) {
+            starsHtml += '<i class="fas fa-star"></i>';
+          } else if (i - 0.5 <= p.rating) {
+            starsHtml += '<i class="fas fa-star-half-alt"></i>';
+          } else {
+            starsHtml += '<i class="far fa-star"></i>';
+          }
+        }
+
+        html += `
+          <div class="product-card">
+            <div class="product-img-wrapper">
+              <img src="${p.image}" alt="${p.name}">
+              <span class="product-badge ${p.category === 'hot' ? 'hot-badge' : ''}">${p.tag}</span>
+              <div class="product-action-overlay">
+                <a href="product.html?id=${p.id}" class="action-icon-btn" title="查看詳情"><i class="fas fa-eye"></i></a>
+                <button class="action-icon-btn" title="加入購物車" onclick="Cart.add('${p.id}')"><i class="fas fa-shopping-bag"></i></button>
+              </div>
+            </div>
+            <div class="product-info">
+              <span class="product-category-text">${p.category === 'hot' ? '熱銷系列' : p.category === 'men' ? '男鞋系列' : p.category === 'women' ? '女鞋系列' : '運動系列'}</span>
+              <a href="product.html?id=${p.id}" class="product-title">${p.name}</a>
+              <div class="product-rating">
+                ${starsHtml}
+                <span class="product-rating-count">(${p.reviewsCount})</span>
+              </div>
+              <div class="product-price-row">
+                <span class="product-price">NT$ ${p.price.toLocaleString()}</span>
+                <button class="add-to-cart-simple-btn" onclick="Cart.add('${p.id}')">加入購物車</button>
+              </div>
+            </div>
+          </div>
+        `;
+      });
+      grid.innerHTML = html;
+    }
+  </script>
+</body>
+</html>

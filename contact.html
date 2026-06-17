@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>聯絡我們 | AuraStride 極光步履</title>
+  <meta name="description" content="聯絡 AuraStride 極光步履。我們為您提供顧客服務、退換貨申請、大宗採購與實體門市導航諮詢。">
+  <link class="icon" rel="icon" href="assets/logo.png" type="image/png">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* FAQ Accordion Styles */
+    .faq-section {
+      padding: 80px 0;
+      background-color: var(--color-bg-pure);
+      border-top: 1px solid var(--color-border);
+    }
+    .faq-container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .faq-item {
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      margin-bottom: 16px;
+      overflow: hidden;
+      background-color: var(--color-bg-soft);
+      transition: var(--transition-smooth);
+    }
+    .faq-question {
+      padding: 20px 24px;
+      font-weight: 700;
+      font-size: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      user-select: none;
+    }
+    .faq-question i {
+      transition: var(--transition-smooth);
+      color: var(--color-accent);
+    }
+    .faq-answer {
+      padding: 0 24px;
+      max-height: 0;
+      overflow: hidden;
+      transition: all 0.3s ease-in-out;
+      color: var(--color-text-muted);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+    .faq-item.active {
+      background-color: var(--color-bg-pure);
+      border-color: var(--color-accent);
+    }
+    .faq-item.active .faq-question i {
+      transform: rotate(180deg);
+    }
+    .faq-item.active .faq-answer {
+      padding: 0 24px 24px;
+      max-height: 200px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 導航欄容器 -->
+  <div id="header-container"></div>
+
+  <main class="main-content">
+    
+    <!-- 頁面 Banner -->
+    <section class="shop-hero" style="background-image: linear-gradient(rgba(15,15,17,0.7), rgba(15,15,17,0.7)), url('assets/products/hot_4.png')">
+      <div class="container">
+        <h1>聯絡我們</h1>
+        <p>我們隨時準備為您解答關於尺寸、保養與售後的所有疑問</p>
+      </div>
+    </section>
+
+    <!-- 聯絡方式與地圖區 -->
+    <section class="container" style="padding: 60px 24px 80px;">
+      <div class="contact-grid">
+        
+        <!-- 聯絡資訊卡片 -->
+        <div class="contact-info-panel">
+          <h3>品牌總部資訊</h3>
+          
+          <div class="contact-detail-item">
+            <div class="contact-detail-icon"><i class="fas fa-map-marker-alt"></i></div>
+            <div class="contact-detail-content">
+              <h4>服務門市 / 總部地址</h4>
+              <p>110 台北市信義區信義路五段 7 號 (台北 101 大樓 88 樓)</p>
+            </div>
+          </div>
+
+          <div class="contact-detail-item">
+            <div class="contact-detail-icon"><i class="fas fa-phone-alt"></i></div>
+            <div class="contact-detail-content">
+              <h4>客服熱線電話</h4>
+              <p>(02) 2345-6789 (週一至週五 09:00 - 18:00)</p>
+            </div>
+          </div>
+
+          <div class="contact-detail-item">
+            <div class="contact-detail-icon"><i class="fas fa-envelope"></i></div>
+            <div class="contact-detail-content">
+              <h4>電子商務合作信箱</h4>
+              <p>service@aurastride.com</p>
+            </div>
+          </div>
+
+          <div class="contact-detail-item">
+            <div class="contact-detail-icon"><i class="fas fa-clock"></i></div>
+            <div class="contact-detail-content">
+              <h4>門市營運時間</h4>
+              <p>週一至週日 11:00 - 22:00 (含國定假日)</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 聯絡表單 -->
+        <div class="contact-form-panel">
+          <h3>發送您的留言</h3>
+          <form onsubmit="handleContactSubmit(event)">
+            <div class="form-group-row">
+              <div class="form-group">
+                <label for="contact-name">您的姓名 *</label>
+                <input type="text" id="contact-name" placeholder="請輸入姓名" required>
+              </div>
+              <div class="form-group">
+                <label for="contact-email">您的電子信箱 *</label>
+                <input type="email" id="contact-email" placeholder="請輸入信箱" required>
+              </div>
+            </div>
+            
+            <div class="form-group-row">
+              <div class="form-group">
+                <label for="contact-phone">聯絡電話</label>
+                <input type="tel" id="contact-phone" placeholder="例如：0912345678">
+              </div>
+              <div class="form-group">
+                <label for="contact-subject">主旨類別 *</label>
+                <select id="contact-subject" required>
+                  <option value="">請選擇諮詢類別</option>
+                  <option value="size">鞋款尺寸諮詢</option>
+                  <option value="shipping">配送與訂單問題</option>
+                  <option value="returns">退換貨申請</option>
+                  <option value="partnership">大宗採購與商業合作</option>
+                  <option value="feedback">意見回饋與其他</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="contact-msg">詳細留言內容 *</label>
+              <textarea id="contact-msg" rows="5" placeholder="請詳細敘述您的需求，我們將於 24 小時內回覆您..." required></textarea>
+            </div>
+
+            <button type="submit" class="submit-form-btn">送出諮詢表單</button>
+          </form>
+        </div>
+
+      </div>
+
+      <!-- 地圖區 -->
+      <div class="map-placeholder">
+        <i class="fas fa-map-marked-alt"></i>
+        <h4>AURASTRIDE 台北旗艦體驗館位置圖</h4>
+        <p style="color: var(--color-text-muted); font-size: 13px; max-width: 500px; margin-top: 8px;">台北市信義區信義路五段7號 (台北101一樓南側大廳旁)。為提供極致包覆量腳服務，建議您提前於官方 Line 預約專屬量足顧問。</p>
+        <!-- 模擬地圖邊框線條與背景 -->
+        <div style="position: absolute; bottom: 12px; font-size: 11px; color: var(--color-accent); font-weight: 700; letter-spacing: 1px;">AuraStride Footwear Lab &amp; Boutique</div>
+      </div>
+    </section>
+
+    <!-- FAQ 折疊問答區 -->
+    <section class="faq-section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">COMMON QUESTIONS</span>
+          <h2 class="section-title">常見問題解答 (FAQ)</h2>
+        </div>
+        
+        <div class="faq-container">
+          <!-- FAQ 1 -->
+          <div class="faq-item" onclick="toggleFaq(this)">
+            <div class="faq-question">
+              <span>Q1. 我不確定自己適合什麼尺寸，如何選購？</span>
+              <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+              <p>我們在每款鞋的產品頁面皆附有詳細的「尺碼表」。男鞋與運動鞋尺碼偏向標準運動尺碼；女鞋與皮鞋鞋面因採用真皮，具有一定延展性，穿久會自然貼合腳型。如果您是寬足或足弓較高，建議選擇大半碼，或蒞臨我們信義體驗館由足部量測儀為您推薦。</p>
+            </div>
+          </div>
+          
+          <!-- FAQ 2 -->
+          <div class="faq-item" onclick="toggleFaq(this)">
+            <div class="faq-question">
+              <span>Q2. 收到鞋子後尺寸不合可以辦理退換貨嗎？</span>
+              <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+              <p>可以的！我們提供 7 天鑑賞期。只要在收到商品的 7 天內，保持鞋面、鞋底無磨損污漬、吊牌配件完整，皆可免費辦理一次退貨或換貨。您可以透過上方的表單選擇「退換貨申請」，我們將會安排黑貓宅急便到府收件。</p>
+            </div>
+          </div>
+
+          <!-- FAQ 3 -->
+          <div class="faq-item" onclick="toggleFaq(this)">
+            <div class="faq-question">
+              <span>Q3. 真皮皮鞋與防水短靴需要特別的保養嗎？</span>
+              <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+              <p>AuraStride 的真皮皮鞋皆經由手工精細塗層擦色。如遇髒污，建議使用柔軟乾布輕輕擦拭；每個月可使用無色皮革保養油薄擦一層。而防水靴款出廠前已施作奈米防水抗污處理，若被水潑濕只需用乾布拭乾並放置於陰涼通風處晾乾即可，切勿使用吹風機高溫烘烤，以免皮革龜裂破壞防水膜。</p>
+            </div>
+          </div>
+
+          <!-- FAQ 4 -->
+          <div class="faq-item" onclick="toggleFaq(this)">
+            <div class="faq-question">
+              <span>Q4. 請問下單後多久可以收到商品？</span>
+              <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+              <p>全店現貨商品於下單後 24 小時內出貨。在台灣本島地區，出貨後約 2-3 個工作天內即可配送至指定地址或超商門市。若是限量手工擦色皮鞋或熱銷斷碼需調貨，客服會第一時間與您聯繫說明出貨期。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- 頁尾容器 -->
+  <div id="footer-container"></div>
+
+  <!-- JS 引入 -->
+  <script src="js/products.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    function toggleFaq(item) {
+      const allItems = document.querySelectorAll(".faq-item");
+      allItems.forEach(i => {
+        if (i !== item) {
+          i.classList.remove("active");
+        }
+      });
+      item.classList.toggle("active");
+    }
+
+    function handleContactSubmit(e) {
+      e.preventDefault();
+      const name = document.getElementById("contact-name").value;
+      const subject = document.getElementById("contact-subject").value;
+      alert(`諮詢發送成功！\n親愛的 ${name} 您好，我們已收到關於「${subject}」的諮詢，客服專員將於 24 小時內以電子信箱與您聯絡。`);
+      e.target.reset();
+    }
+  </script>
+</body>
+</html>

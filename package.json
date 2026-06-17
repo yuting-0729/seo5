@@ -1,0 +1,13 @@
+{
+  "name": "aurastride-store",
+  "version": "1.0.0",
+  "description": "AuraStride premium shoe store",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "open": "^8.4.2"
+  }
+}
